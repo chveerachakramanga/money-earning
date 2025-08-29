@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EarnEasy — Find Part‑Time Online Work</title>
+  <meta name="description" content="EarnEasy helps people find flexible, low-barrier part-time online jobs, microtasks and quick gigs. Apply fast, build a simple profile, track earnings." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--muted:#94a3b8;--accent:#06b6d4;--glass: rgba(255,255,255,0.03)}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial; margin:0; background:linear-gradient(180deg,#071022 0%, #0f1724 100%); color:#e6eef6}
+    .wrap{max-width:1100px;margin:28px auto;padding:20px}
+    header{display:flex;align-items:center;gap:16px}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#061826;box-shadow:0 6px 20px rgba(3,7,18,0.7)}
+    h1{margin:0;font-size:28px}
+    p.lead{margin:6px 0 24px;color:var(--muted)}
+
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
+    @media (max-width:980px){.grid{grid-template-columns:1fr} .aside{order:2}}
+
+    .searchbar{display:flex;gap:8px;margin-bottom:14px}
+    .searchbar input, .searchbar select{flex:1;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:var(--card);color:inherit}
+    .searchbar button{padding:12px 16px;border-radius:10px;border:none;background:var(--accent);color:#042a32;font-weight:700;cursor:pointer}
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:16px;border-radius:14px}
+
+    .job{display:flex;gap:12px;padding:12px;border-radius:12px;margin-bottom:10px;align-items:flex-start;background:var(--glass)}
+    .job h3{margin:0;font-size:16px}
+    .job .meta{font-size:13px;color:var(--muted);margin-top:6px}
+    .job .tags{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+    .tag{background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:8px;font-size:12px;color:var(--muted)}
+    .apply{background:#0ea5a2;padding:8px 10px;border-radius:10px;color:#011;cursor:pointer;border:none;font-weight:700}
+
+    .aside .card + .card{margin-top:12px}
+    .small{font-size:13px;color:var(--muted)}
+
+    .filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+    .pill{background:rgba(255,255,255,0.025);padding:8px 10px;border-radius:999px;font-size:13px;cursor:pointer}
+    .pill.active{border:1px solid rgba(255,255,255,0.06);background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04))}
+
+    .empty{padding:40px;text-align:center;color:var(--muted)}
+
+    footer{margin-top:24px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:flex;align-items:center;justify-content:center;padding:18px}
+    .modal{width:100%;max-width:720px;background:linear-gradient(180deg,#071022,#0c1928);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.04)}
+    label{display:block;font-size:13px;color:var(--muted);margin-top:10px}
+    input[type=text], textarea, input[type=email], input[type=tel]{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:#071323;color:inherit}
+    .row{display:flex;gap:8px}
+    .muted{color:var(--muted);font-size:13px}
+    .btn-row{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
+    .btn{padding:10px 12px;border-radius:10px;border:none;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+    .btn.primary{background:var(--accent);color:#062226;font-weight:700}
+
+    /* quick-stats */
+    .stats{display:flex;gap:8px}
+    .stat{flex:1;padding:12px;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));text-align:center}
+    .stat h4{margin:0}
+    .small-muted{font-size:12px;color:var(--muted)}
+
+    /* timeline */
+    .tips li{margin:10px 0}
+
+    /* microtasks card */
+    .microtask{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);margin-bottom:8px}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">EE</div>
+      <div>
+        <h1>EarnEasy — Quick online part‑time jobs & microgigs</h1>
+        <p class="lead">Low-barrier tasks, micro-services, and resources to help you earn reliably from home.</p>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main>
+        <div class="card">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+            <div style="flex:1">
+              <div class="searchbar">
+                <input id="q" placeholder="Search jobs, skills or companies (e.g., data entry, transcription)" />
+                <select id="sort"><option value="latest">Latest</option><option value="pay">Higher pay</option></select>
+                <button id="searchBtn">Search</button>
+              </div>
+              <div class="filters" id="filters"></div>
+            </div>
+            <div style="min-width:180px;text-align:right">
+              <div class="small-muted">Your balance</div>
+              <div style="font-size:20px;font-weight:700">₹ <span id="balance">0</span></div>
+            </div>
+          </div>
+
+          <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:16px 0">
+
+          <div id="jobsList"></div>
+          <div id="emptyHint" class="empty" style="display:none">No jobs found. Try broadening your search or check microtasks in the sidebar.</div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3>Why EarnEasy?</h3>
+          <ul class="tips">
+            <li>Focus on simple, repeatable tasks — data entry, short transcriptions, captioning, micro-surveys.</li>
+            <li>Build a quick profile (1‑page CV) and reuse it to apply fast.</li>
+            <li>Use the built-in quick‑apply to submit proposals in 30 seconds.</li>
+          </ul>
+        </div>
+
+      </main>
+
+      <aside class="aside">
+        <div class="card">
+          <h3>Quick Stats</h3>
+          <div class="stats" style="margin-top:10px">
+            <div class="stat"><h4 id="jobsCount">0</h4><div class="small-muted">Active gigs</div></div>
+            <div class="stat"><h4 id="microCount">0</h4><div class="small-muted">Microtasks</div></div>
+            <div class="stat"><h4 id="appsSent">0</h4><div class="small-muted">Applications</div></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3>Microtasks (earn fast)</h3>
+          <div id="microtasks"></div>
+          <button id="claimAll" class="pill" style="width:100%;margin-top:10px">Auto-claim 3 easiest</button>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3>Fast Profile</h3>
+          <div class="small-muted">Fill once. Use quick‑apply.</div>
+          <div style="margin-top:8px">
+            <input id="name" placeholder="Full name" type="text" style="margin-bottom:8px" />
+            <input id="email" placeholder="Email" type="email" style="margin-bottom:8px" />
+            <input id="phone" placeholder="Phone (optional)" type="tel" />
+            <div style="margin-top:8px"><button id="saveProfile" class="pill" style="width:100%">Save profile</button></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3>Tips & Safety</h3>
+          <ul class="small-muted">
+            <li>Never pay to apply for a job.</li>
+            <li>Prefer established payment methods (UPI, PayTM, PayPal).</li>
+            <li>Keep records of your submissions and receipts.</li>
+          </ul>
+        </div>
+
+      </aside>
+    </div>
+
+    <footer>
+      Built with ♡ — EarnEasy • Prototype • Save your profile locally. Not a marketplace: always verify employers.
+    </footer>
+
+  </div>
+
+  <!-- Modal template (hidden) -->
+  <div id="modalRoot" style="display:none"></div>
+
+  <script>
+    // Lightweight single-file app logic
+    // Data: seed job listings and microtasks
+    const seedJobs = [
+      {id:1,title:'Short transcription (audio 5-10 mins)',company:'QuickTrans',pay:150,remote:true,cat:'transcription',desc:'Listen and transcribe short audio clips. Basic English required.',minHours:0.5,posted:'2025-08-10'},
+      {id:2,title:'Data entry: Excel to DB',company:'ShopMetrics',pay:400,remote:true,cat:'data-entry',desc:'Copy-paste product info into provided template. No experience needed.',minHours:1,posted:'2025-08-22'},
+      {id:3,title:'Micro-survey (5 questions)',company:'SurveyBee',pay:50,remote:true,cat:'survey',desc:'Answer a short survey; must be 18+.',minHours:0.1,posted:'2025-08-27'},
+      {id:4,title:'Image tagging (20 images)',company:'VisionLab',pay:200,remote:true,cat:'tagging',desc:'Label images using provided tool. Quick training included.',minHours:0.5,posted:'2025-08-25'},
+      {id:5,title:'Website usability test (10 mins)',company:'UXCheck',pay:300,remote:true,cat:'testing',desc:'Perform a quick task on a website and record feedback.',minHours:0.2,posted:'2025-08-26'},
+    ];
+    const seedMicro = [
+      {id:'m1',title:'Short survey (₹50)',pay:50},{id:'m2',title:'Caption 5 images (₹120)',pay:120},{id:'m3',title:'Transcribe 2-min clip (₹80)',pay:80},{id:'m4',title:'Tag 10 images (₹100)',pay:100}
+    ];
+
+    // State
+    let jobs = JSON.parse(localStorage.getItem('ee_jobs')) || seedJobs;
+    let micro = JSON.parse(localStorage.getItem('ee_micro')) || seedMicro;
+    let balance = Number(localStorage.getItem('ee_balance')||0);
+    let appsSent = Number(localStorage.getItem('ee_apps')||0);
+
+    // UI refs
+    const jobsList = document.getElementById('jobsList');
+    const filtersEl = document.getElementById('filters');
+    const qInput = document.getElementById('q');
+    const sortSel = document.getElementById('sort');
+    const emptyHint = document.getElementById('emptyHint');
+
+    // Render functions
+    function renderJobs(list){
+      jobsList.innerHTML = '';
+      if(list.length===0){ emptyHint.style.display='block'; return; } else emptyHint.style.display='none';
+      list.forEach(j=>{
+        const el = document.createElement('div'); el.className='job';
+        const left = document.createElement('div'); left.style.flex='1';
+        left.innerHTML = `<h3>${escapeHtml(j.title)}</h3><div class="meta">${escapeHtml(j.company)} • ₹${j.pay} • ${j.cat} • posted ${j.posted}</div><div style="margin-top:8px;color:var(--muted);font-size:13px">${escapeHtml(j.desc)}</div>`;
+        const right = document.createElement('div'); right.style.display='flex'; right.style.flexDirection='column'; right.style.alignItems='flex-end';
+        const tags = document.createElement('div'); tags.className='tags'; tags.innerHTML = `<div class="tag">min ${j.minHours}h</div><div class="tag">remote</div>`;
+        const btn = document.createElement('button'); btn.className='apply'; btn.textContent='Quick Apply'; btn.onclick = ()=> openApplyModal(j);
+        right.appendChild(tags); right.appendChild(btn);
+        el.appendChild(left); el.appendChild(right);
+        jobsList.appendChild(el);
+      });
+    }
+
+    function renderFilters(){
+      const cats = Array.from(new Set(jobs.map(j=>j.cat)));
+      filtersEl.innerHTML='';
+      ['all','remote','highpay', ...cats].forEach(f=>{
+        const p = document.createElement('div'); p.className='pill'; p.textContent = (f==='all'? 'All' : f==='remote'? 'Remote' : f==='highpay'? 'High pay' : capitalize(f));
+        p.dataset.filter = f; p.onclick = ()=>{document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active')); p.classList.add('active'); applyFilters();}
+        if(f==='all') p.classList.add('active');
+        filtersEl.appendChild(p);
+      });
+    }
+
+    function renderMicro(){
+      const wrap = document.getElementById('microtasks'); wrap.innerHTML='';
+      micro.forEach(m=>{
+        const el = document.createElement('div'); el.className='microtask';
+        el.innerHTML = `<div><strong>${escapeHtml(m.title)}</strong><div class="small-muted">Earn ₹${m.pay}</div></div>`;
+        const btn = document.createElement('button'); btn.className='pill'; btn.textContent='Do'; btn.onclick=()=> doMicrotask(m);
+        el.appendChild(btn);
+        wrap.appendChild(el);
+      });
+      document.getElementById('microCount').textContent = micro.length;
+    }
+
+    function applyFilters(){
+      const active = document.querySelector('.pill.active')?.dataset.filter || 'all';
+      let res = jobs.slice();
+      const q = qInput.value.trim().toLowerCase();
+      if(q){ res = res.filter(j=> (j.title+j.company+j.desc+j.cat).toLowerCase().includes(q)); }
+      if(active==='remote') res = res.filter(j=> j.remote);
+      if(active==='highpay') res = res.filter(j=> j.pay>=200);
+      if(active!=='all' && active!=='remote' && active!=='highpay'){
+        res = res.filter(j=> j.cat===active);
+      }
+      const sort = sortSel.value;
+      if(sort==='pay') res.sort((a,b)=>b.pay-a.pay); else res.sort((a,b)=> new Date(b.posted)-new Date(a.posted));
+      renderJobs(res);
+      document.getElementById('jobsCount').textContent = res.length;
+    }
+
+    function openApplyModal(job){
+      const modalRoot = document.getElementById('modalRoot');
+      modalRoot.innerHTML = `
+      <div class="modal-backdrop" id="modalBackdrop">
+        <div class="modal card">
+          <h3>Quick Apply: ${escapeHtml(job.title)}</h3>
+          <div class="muted">${escapeHtml(job.company)} • ₹${job.pay}</div>
+          <label>Your pitch (1-2 lines)</label>
+          <textarea id="pitch" rows="3" placeholder="I have experience with ..."></textarea>
+          <label>Attach sample link (optional)</label>
+          <input id="sample" placeholder="Link to sample (e.g., Google Drive)" type="text" />
+          <div class="btn-row">
+            <button class="btn ghost" id="cancelBtn">Cancel</button>
+            <button class="btn primary" id="sendApp">Send Application</button>
+          </div>
+        </div>
+      </div>
+      `;
+      modalRoot.style.display='block';
+      document.getElementById('cancelBtn').onclick = closeModal;
+      document.getElementById('modalBackdrop').onclick = (e)=>{ if(e.target.id==='modalBackdrop') closeModal(); };
+      document.getElementById('sendApp').onclick = ()=>{
+        const pitch = document.getElementById('pitch').value.trim();
+        const sample = document.getElementById('sample').value.trim();
+        const profile = getProfile();
+        if(!profile.name || !profile.email){ alert('Save your profile first to apply quickly.'); return; }
+        // simulate sending application and credit small bonus on acceptance probability
+        appsSent += 1; localStorage.setItem('ee_apps', appsSent);
+        document.getElementById('appsSent').textContent = appsSent;
+        // small random chance of instant task awarding
+        const awarded = Math.random() < 0.2;
+        if(awarded){ balance += job.pay; localStorage.setItem('ee_balance', balance); document.getElementById('balance').textContent = balance; alert('Application accepted! Task credited to your balance.'); }
+        else alert('Application sent. You will be notified by email (simulated).');
+        closeModal();
+      };
+    }
+
+    function closeModal(){ const modalRoot = document.getElementById('modalRoot'); modalRoot.style.display='none'; modalRoot.innerHTML=''; }
+
+    function doMicrotask(m){
+      // Quick microtask workflow: confirm, then credit
+      if(confirm(`Do microtask: ${m.title}? You
